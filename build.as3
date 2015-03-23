@@ -1,0 +1,27 @@
+import redbean.*;
+import shell.Program;
+import shell.FileSystem;
+import C.sys.stat.*;
+
+compile( "src/as3shebang.as" );
+
+if( FileSystem.exists( "as3shebang.abc" ) )
+{
+	FileSystem.removeFile( "as3shebang.abc" );
+}
+
+if( FileSystem.exists( "src/as3shebang.abc" ) )
+{
+
+	FileSystem.move( "src/as3shebang.abc", "as3shebang.abc" );
+
+	projector( "as3shebang", true, null, ["as3shebang.abc"] );
+	chmod( "as3shebang", ACCESSPERMS );
+	Program.exec( "sudo cp as3shebang /usr/bin/" );
+	//$ sudo cp as3shebang /usr/bin/
+
+}
+else
+{
+	trace( "nothing built" );
+}
