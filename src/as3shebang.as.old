@@ -51,6 +51,21 @@ if( Program.argv.length == 0 )
 	exit( EXIT_FAILURE );
 }
 
+/*
+trace( "args:" );
+trace( "--------" );
+for( var i:uint = 0; i < Program.argv.length; i++ )
+{
+	trace( "argv[" + i + "] = " + Program.argv[i] );
+}
+trace( "--------" );
+trace( "Program.filename = " + Program.filename );
+trace( "Program.startupDirectory = " + Program.startupDirectory );
+trace( "--------" );
+*/
+
+//var scriptname:String = Program.argv[0];
+//var scriptname:String = Program.argv.shift();
 scriptname = Program.argv.shift();
 
 var script:String = FileSystem.read( scriptname );
@@ -65,6 +80,39 @@ else
 	trace( "[as3shebang " + as3sbv + "] no shebang found" );
   exit( EXIT_FAILURE );
 }
+
+/*
+trace( "source:" );
+trace( "--------" );
+trace( source );
+trace( "--------" );
+*/
+
+/*
+var options:String = "";
+    options += " -Dastrace 1 ";
+
+var args:String = "";
+
+if( Program.argv.length > 0 )
+{
+    args += " -- ";
+    args += Program.argv.join( " " );
+}
+
+
+var scriptpath:String = FileSystem.absolutePath( scriptname );
+    scriptpath += ".tmp";
+
+FileSystem.write( scriptpath, source );
+
+var exitcode:int = Program.exec( "/usr/bin/redshell " + options + scriptpath + args );
+
+FileSystem.removeFile( scriptpath );
+
+//trace( "exitcode: " + exitcode );
+exit( exitcode );
+*/
 
 try
 {
