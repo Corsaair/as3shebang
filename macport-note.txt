@@ -1,0 +1,20 @@
+How to build a MacPorts package for Mac OS X
+============================================
+
+--------------------------------------------
+$ sudo port selfupdate
+$ sudo port upgrade outdated
+--------------------------------------------
+/opt/local/etc/macports/sources.conf
+
+/Applications/MacPorts/Python\ 2.7 
+
+/Applications/MacPorts/ports/lang/as3shebang/Portfile
+
+file:///Applications/MacPorts/ports/lang/as3shebang/Portfile
+
+
+$ sudo mkdir -p /Applications/MacPorts/ports/lang/as3shebang
+$ sudo touch /Applications/MacPorts/ports/lang/as3shebang/Portfile
+
+============================================

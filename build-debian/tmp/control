@@ -1,0 +1,25 @@
+Package: as3shebang
+Version: 1.0.0
+Section: interpreters
+Priority: optional
+Architecture: amd64
+Depends: bash (>= 4.0)
+Maintainer: Zwetan Kjukov <zwetan@gmail.com>
+Description: Run ActionScript 3.0 shell scripts
+ This is an executable program based on the RedTamarin runtime,
+ designed to help you run AS3 shell scripts. It allows you to run
+ uncompiled ActionScript 3.0 source code as an executable shell script.
+ Written for Linux 32-bit and 64-bit, it supports the full
+ ActionScriopt 3.0 language features and the RedTamarin API.
+ .
+ Other features are a C POSIX API, File System, Sockets, etc.
+ and many more, please consult the online documentation related
+ to the RedTamarin runtime version 0.4.1T174.
+ .
+ This package is currently beta, mostly tested under Ubuntu and Debian.
+ Because it is evaluating the scripts at runtime you may encounter some glitches
+ with imported classes or packages not reckonised by the environment.
+ .
+ You can find more information about as3shebang at http://redtamarin.com/tools/as3shebang.
+ You can find more information about RedTamarin at http://www.redtamarin.com.
+ You can find all the supported functions, classes and API at http://docs.redtamarin.com.
