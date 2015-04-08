@@ -14,6 +14,10 @@ http://www.ibiblio.org/pub/Linux/docs/LDP/linuxfocus/English/November2003/articl
 
 ---------------------------------------------
 
+arch:
+i386  -> 32-bit
+amd64 -> 64-bit
+
 ---------------------------------------------
 $ dpkg-architecture -L
 
