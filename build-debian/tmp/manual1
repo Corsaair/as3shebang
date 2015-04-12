@@ -1,0 +1,91 @@
+.TH as3shebang 1 "Avril 8, 2015" "version 0.9" "USER COMMANDS"
+.SH NAME 
+as3shebang \- Run ActionScript 3.0 shell scripts
+.SH SYNOPSIS 
+You do not execute as3shebang directly.
+You have to use the following shebang line as the first line
+of an executable shell script
+.PP
+.B #!/usr/bin/as3shebang -- 
+.SH DESCRIPTION 
+This is an executable program based on the
+.B RedTamarin
+runtime, designed to help you run AS3 shell scripts. It allows you to run
+uncompiled ActionScript 3.0 source code as an executable shell script.
+Written for Linux
+.B 32-bit
+and
+.B 64-bit
+, it supports the full ActionScriopt 3.0 language features
+and the RedTamarin API.
+.PP
+Other features are a C POSIX API, File System, Sockets, etc.
+and many more, please consult the online documentation related
+to the RedTamarin runtime
+.B version 0.4.1T174
+.
+.PP
+This package is currently beta, mostly tested under Debian and Ubuntu.
+Because it is evaluating the scripts at runtime you may encounter some glitches
+with imported classes or packages not reckonised by the environment.
+.PP
+You can find more information about
+.B as3shebang
+at
+.I http://redtamarin.com/tools/as3shebang
+.PP
+You can find more information about
+.B RedTamarin
+at
+.I http://www.redtamarin.com
+.PP
+You can find all the supported
+.B functions
+, 
+.B classes
+and
+.B API
+at
+.I http://docs.redtamarin.com
+.SH EXAMPLES
+Create a simple test script
+.PP
+.B $ touch test
+.PP
+.B $ nano test
+.PP
+.nf
+#!/usr/bin/as3shebang -- 
+trace( "hello world" );
+.fi
+.PP
+Make the script executable
+.PP
+.B $ chmod +x test
+.PP
+Run the shell script
+.PP
+.B $ ./test
+.PP
+.SH ERRORS
+If you try to run as3sheabng directly you will obtain
+.nf
+[as3shebang 0.9] no script arguments found
+.fi
+.PP
+If your script contains errors you will see a stacktrace
+.nf
+ReferenceError: Error #1065: Variable UNKNOWN is not defined.
+	at global$init()[:2]
+	at shell::Runtime$/eval()
+	at global$init()
+.fi
+.PP
+.SH EXIT STATUS
+as3sheabng returns a zero exit status if it succeeds to evaluate the script.
+Otherwise it returns a one exit status when the script contains errors.
+.PP
+The shell script can returns any exit status and override the default
+exit status described above.
+.SH AUTHOR
+Zwetan Kjukov (zwetan (at) gmail.com)

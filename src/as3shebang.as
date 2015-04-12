@@ -35,6 +35,8 @@
 
 package
 {
+    public var as3shebang:String = "0.0";
+
     public var scriptname:String = "";
 }
 
@@ -44,6 +46,7 @@ import shell.FileSystem;
 import C.stdlib.*;
 
 var as3sbv:String = "0.9";
+as3shebang = as3sbv;
 
 if( Program.argv.length == 0 )
 {
