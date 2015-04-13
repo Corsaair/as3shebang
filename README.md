@@ -15,6 +15,27 @@ and use the following as first line:
 #!/usr/bin/as3shebang --
 ```
 
+Install
+-------
+
+Download the package for your operating system
+
+**Ubuntu** / **Debian**
+
+`$ sudo dpkg -i as3shebang_0.9-1_amd64.deb`
+
+**Mac OS X**
+
+Run `as3shebang_0.9-1.pkg`
+
+
+**Manual**
+
+If you build the executable yourself you can do a manual install
+
+`sudo cp as3shebang /usr/bin`
+
+
 Example
 -------
 
