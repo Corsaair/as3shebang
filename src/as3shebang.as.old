@@ -88,6 +88,12 @@ trace( source );
 trace( "--------" );
 */
 
+/* NOTE:
+   alternative to remove the shebang line and create a temporary AS3 script file
+   ran by the redshell, that we expect to be installed in /usr/bin/redshell
+   ideally we woudl want to detect the env var REDTAMARIN_SDK and run the
+   redshell from /sdk/redtamarin/runtimes/redhsell/{OPERATING_SYSTEM}/{ARCH}/redshell
+*/
 /*
 var options:String = "";
     options += " -Dastrace 1 ";
