@@ -31,6 +31,7 @@
      it could be "/usr/local/bin/as3shebang" etc.
    - the argv[0] which should contains the script name is removed at runtime
    - you can find the script name in the global variable "scriptname"
+   - you can find the as3sheabng version in the global variable "as3shebang"
 */
 
 package
