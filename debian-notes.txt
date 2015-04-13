@@ -3,6 +3,8 @@ How to build a .deb package for Debian/Ubuntu
 Debian Binary Package Building HOWTO
 http://tldp.org/HOWTO/html_single/Debian-Binary-Package-Building-HOWTO/
 
+How to make a "Basic" .deb
+http://ubuntuforums.org/showthread.php?t=910717
 
 Chapter 6. Best Packaging Practices
 https://www.debian.org/doc/manuals/developers-reference/best-pkging-practices.html
@@ -11,6 +13,23 @@ https://www.debian.org/doc/manuals/developers-reference/best-pkging-practices.ht
 Writing man-pages
 http://www.ibiblio.org/pub/Linux/docs/LDP/linuxfocus/English/November2003/article309.meta.shtml
 ---------------------------------------------
+secnario:
+
+#build package
+$ dpkg-deb --build as3shebang_0.9-1_{ARCH}
+$ dpkg-deb --build as3shebang_0.9-1_amd64
+$ dpkg-deb --build as3shebang_0.9-1_i386
+
+#install package
+$ sudo dpkg -i as3shebang_0.9-1.deb
+
+#sho package info
+$ apt-cache show as3shebang
+$ dpkg -l | grep as3shebang
+
+#uninstall package
+$ sudo dpkg -r as3shebang
+
 
 ---------------------------------------------
 
@@ -370,4 +389,53 @@ uclinux-sh4eb
 uclinux-sparc
 uclinux-sparc64
 mint-m68k
+---------------------------------------------
+list dependencies
+
+$ readelf -d as3shebang
+
+Dynamic section at offset 0x745e18 contains 25 entries:
+  Tag        Type                         Name/Value
+ 0x0000000000000001 (NEEDED)             Shared library: [libpthread.so.0]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+...
+
+$ ldd -v as3shebang
+
+...
+	Version information:
+	./as3shebang:
+		libm.so.6 (GLIBC_2.2.5) => /lib/x86_64-linux-gnu/libm.so.6
+		libstdc++.so.6 (CXXABI_1.3) => /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+		libstdc++.so.6 (GLIBCXX_3.4) => /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+		libpthread.so.0 (GLIBC_2.2.5) => /lib/x86_64-linux-gnu/libpthread.so.0
+		libpthread.so.0 (GLIBC_2.3.2) => /lib/x86_64-linux-gnu/libpthread.so.0
+		libc.so.6 (GLIBC_2.4) => /lib/x86_64-linux-gnu/libc.so.6
+		libc.so.6 (GLIBC_2.14) => /lib/x86_64-linux-gnu/libc.so.6
+		libc.so.6 (GLIBC_2.3) => /lib/x86_64-linux-gnu/libc.so.6
+		libc.so.6 (GLIBC_2.15) => /lib/x86_64-linux-gnu/libc.so.6
+		libc.so.6 (GLIBC_2.2.5) => /lib/x86_64-linux-gnu/libc.so.6
+		...
+
+$ objdump -x as3shebang
+
+as3shebang:     file format elf64-x86-64
+...
+Dynamic Section:
+  NEEDED               libpthread.so.0
+  NEEDED               libstdc++.so.6
+  NEEDED               libm.so.6
+  NEEDED               libc.so.6
+...
+
+
+should be
+
+DEBIAN/control
+...
+Depends: libstdc++6 (>= 3.4), libc6 (>= 2.14)
+...
+
 =============================================
