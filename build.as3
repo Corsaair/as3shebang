@@ -15,8 +15,9 @@ if( FileSystem.exists( "src/as3shebang.abc" ) )
 
 	FileSystem.move( "src/as3shebang.abc", "as3shebang.abc" );
 
-	projector( "as3shebang", true, null, ["as3shebang.abc"] );
-	chmod( "as3shebang", ACCESSPERMS );
+	//projector( "as3shebang", true, OS.macintosh64, ["as3shebang.abc"] );
+	//projector( "as3shebang", true, null, ["as3shebang.abc"] );
+	//chmod( "as3shebang", ACCESSPERMS );
 	//Program.exec( "sudo cp as3shebang /usr/bin/" );
 	//$ sudo cp as3shebang /usr/bin/
 
