@@ -1,0 +1,14 @@
+Package: as3shebang
+Version: VERSION
+Section: interpreters
+Priority: optional
+Architecture: ARCHITECTURE
+Installed-Size: INSTALLED_SIZE
+Depends: glibc (>= 2.14)
+Maintainer: Zwetan Kjukov <zwetan@gmail.com>
+Description: The ActionScript 3.0 Interpreter
+ As3shebang is an executable program based on the RedTamarin runtime.
+ .
+ It allows you to run uncompiled ActionScript 3.0 source code
+ as an executable shell script.
+
