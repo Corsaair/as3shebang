@@ -34,31 +34,49 @@
    - you can find the as3sheabng version in the global variable "as3shebang"
 */
 
-package
-{
-    public var as3shebang:String = "0.0";
-
-    public var scriptname:String = "";
-}
-
 import shell.Program;
 import shell.Runtime;
+import shell.ShellType;
 import shell.FileSystem;
 import C.stdlib.*;
 
-var as3sbv:String = "0.9";
-as3shebang = as3sbv;
+/*
+trace( "A:" );
+trace( "filename = " + Program.filename );
+trace( "    argv = " + Program.argv );
+trace( "    type = " + Program.type );
+trace( "" );
+*/
 
 if( Program.argv.length == 0 )
 {
-	trace( "[as3shebang " + as3sbv + "] no script arguments found" );
+	trace( "[as3shebang 1.0] no script arguments found" );
 	exit( EXIT_FAILURE );
 }
 
-scriptname = Program.argv.shift();
+
+var scriptname:String = Program.argv.shift();
+Program.AVM2::_filename = scriptname;
+Program.AVM2::_type     = ShellType.SCRIPT;
+
+if( (scriptname == undefined) || (scriptname == null) || (scriptname == "")
+    || !FileSystem.exists( scriptname ) )
+{
+  trace( "[as3shebang 1.0] script \"" + scriptname + "\" not found" );
+  exit( EXIT_FAILURE );
+}
 
 var script:String = FileSystem.read( scriptname );
+var shebangline:String = "";
 var source:String = "";
+
+/*
+trace( "B:" );
+trace( "filename = " + Program.filename );
+trace( "    argv = " + Program.argv );
+trace( "    type = " + Program.type );
+trace( "" );
+*/
 
 if( script.indexOf( "#!" ) == 0 )
 {
@@ -66,7 +84,7 @@ if( script.indexOf( "#!" ) == 0 )
 }
 else
 {
-	trace( "[as3shebang " + as3sbv + "] no shebang found" );
+	trace( "[as3shebang 1.0] no shebang found" );
   exit( EXIT_FAILURE );
 }
 
