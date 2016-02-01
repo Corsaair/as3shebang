@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# dependencies:
+# wpkg
+# gzip
+# pandoc
+
+RELEASE=bin-release
+ARCHITECTURE=win32
+DEBVER=1.0.0
+BASE=as3shebang_${DEBVER}_${ARCHITECTURE}
+ROOTDIR=$RELEASE/$BASE
+
+rm -Rf $RELEASE
+mkdir -p $ROOTDIR
+
+DIST=`pwd`/$ROOTDIR
+DEST=$DIST/usr
+
+# note:
+# for Cygwin
+# /usr/bin -> /bin
+# /usr/lib -> /lib
+mkdir -p $DIST/bin
+mkdir -p $DEST/share/man/man1
+
+chmod 775 $DIST
+find $DIST -type d | xargs chmod -R 755
+
+# make abc
+java -jar build/asc.jar -AS3 -optimize -import lib-abc/redtamarin.abc src/as3shebang.as
+mv src/as3shebang.abc bin-release/
+
+# make projector
+./redshell_dd_win32.exe projectormake.abc -- -o bin-release/as3shebang.exe redshell_dd_win32.exe bin-release/as3shebang.abc  -- -Dlanguage en
+
+cp $RELEASE/as3shebang.exe $DIST/bin/
+chmod 755 $DIST/bin/as3shebang.exe
+# no ownership under Cygwin
+# chown root:root $DIST/bin/as3shebang.exe
+
+# make man
+pandoc build/as3shebang.1.md -s -t man -o bin-release/as3shebang.1
+
+cp $RELEASE/as3shebang.1 $DEST/share/man/man1/as3shebang.1
+gzip -9 $DEST/share/man/man1/as3shebang.1
+chmod 644 $DEST/share/man/man1/as3shebang.1.gz
+# no ownership under Cygwin
+# chown root:root $DEST/share/man/man1/as3shebang.1.gz
+
+INSTALLED_SIZE=$(du -k -s $DEST | awk '{print $1}')
+mkdir $DIST/DEBIAN
+
+perl -pe "s/VERSION/$DEBVER/" build/windows/control.in | \
+  perl -pe "s/ARCHITECTURE/$ARCHITECTURE/" | \
+  perl -pe "s/INSTALLED_SIZE/$INSTALLED_SIZE/" \
+  > $DIST/DEBIAN/control
+
+# note:
+# for Wpkg
+# we need to build the deb package
+# from the current /bin-release directory
+# eg. wpkg -b something_1.0.0_win64
+# this wpkg -b /bin-release/something_1.0.0_win64 will not work
+cd $RELEASE
+wpkg --build $BASE
