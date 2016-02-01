@@ -6,4 +6,48 @@
 # gzip
 # pandoc
 
-# TODO
+RELEASE=bin-release
+ARCHITECTURE=darwin-amd64
+DEBVER=1.0.0
+BASE=as3shebang-${DEBVER}-${ARCHITECTURE}
+ROOTDIR=$RELEASE/$BASE
+
+rm -Rf $RELEASE
+mkdir -p $ROOTDIR
+
+DIST=`pwd`/$ROOTDIR
+DEST=$DIST/usr
+
+mkdir -p $DEST/bin
+mkdir -p $DEST/share/man/man1
+
+find $DIST -type d | xargs chmod 755
+
+# make abc
+java -jar build/asc.jar -AS3 -optimize -import lib-abc/redtamarin.abc src/as3shebang.as
+mv src/as3shebang.abc bin-release/
+
+# make projector
+./redshell_dd_nix64 projectormake.abc -- -o bin-release/as3shebang redshell_dd_mac64 bin-release/as3shebang.abc  -- -Dlanguage en
+
+cp $RELEASE/as3shebang $DEST/bin/
+sudo chmod 755 $DEST/bin/as3shebang
+sudo chown root:root $DEST/bin/as3shebang
+
+# make man
+pandoc build/as3shebang.1.md -s -t man -o bin-release/as3shebang.1
+
+cp $RELEASE/as3shebang.1 $DEST/share/man/man1/as3shebang.1
+gzip -9 $DEST/share/man/man1/as3shebang.1
+sudo chmod 644 $DEST/share/man/man1/as3shebang.1.gz
+sudo chown root:root $DEST/share/man/man1/as3shebang.1.gz
+
+INSTALLED_SIZE=$(du -k -s $DEST | awk '{print $1}')
+mkdir $DIST/DEBIAN
+
+perl -pe "s/VERSION/$DEBVER/" build/macintosh/control.in | \
+  perl -pe "s/ARCHITECTURE/$ARCHITECTURE/" | \
+  perl -pe "s/INSTALLED_SIZE/$INSTALLED_SIZE/" \
+  > $DIST/DEBIAN/control
+
+fakeroot dpkg-deb --build $DIST
