@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# dependencies:
+# dpkg-deb
+# fakeroot
+# gzip
+# pandoc
+
+# TODO
