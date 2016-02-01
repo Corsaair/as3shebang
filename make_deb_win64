@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # dependencies:
-# dpkg-deb
-# fakeroot
+# wpkg
 # gzip
 # pandoc
 
@@ -52,7 +51,7 @@ chmod 644 $DEST/share/man/man1/as3shebang.1.gz
 INSTALLED_SIZE=$(du -k -s $DEST | awk '{print $1}')
 mkdir $DIST/DEBIAN
 
-perl -pe "s/VERSION/$DEBVER/" build/macintosh/control.in | \
+perl -pe "s/VERSION/$DEBVER/" build/windows/control.in | \
   perl -pe "s/ARCHITECTURE/$ARCHITECTURE/" | \
   perl -pe "s/INSTALLED_SIZE/$INSTALLED_SIZE/" \
   > $DIST/DEBIAN/control
