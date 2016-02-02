@@ -1,5 +1,5 @@
-The ActionScript 3.0 Interpreter
-================================
+as3shebang – The ActionScript 3.0 Interpreter
+=============================================
 
 **as3shebang** is an executable program based on the RedTamarin runtime.
 
