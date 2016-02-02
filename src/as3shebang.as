@@ -13,25 +13,14 @@
    $ chmod +x myscript.as
 
    3. as first line of your script define the shebang line
-   $ pico myscript.as
+   $ nano myscript.as
    --------
-   #!/usr/bin/as3shebang -- 
+   #!/usr/bin/as3shebang
    trace( "hello world" );
    --------
 
    4. run
    $ ./myscript.as
-
-   note:
-   - you have to use exactly '#!/usr/bin/as3shebang -- '
-     the path followed by "--" is mandatory otherwise it will not works
-     that means you can directly pass user arguments
-     but also that you can not configure the redshell options
-     the path can change, eg. "/usr/bin/as3shebang"
-     it could be "/usr/local/bin/as3shebang" etc.
-   - the argv[0] which should contains the script name is removed at runtime
-   - you can find the script name in the global variable "scriptname"
-   - you can find the as3sheabng version in the global variable "as3shebang"
 */
 
 import shell.Program;
@@ -40,6 +29,7 @@ import shell.ShellType;
 import shell.FileSystem;
 import C.stdlib.*;
 
+//DEBUG
 /*
 trace( "A:" );
 trace( "filename = " + Program.filename );
@@ -70,6 +60,7 @@ var script:String = FileSystem.read( scriptname );
 var shebangline:String = "";
 var source:String = "";
 
+//DEBUG
 /*
 trace( "B:" );
 trace( "filename = " + Program.filename );
