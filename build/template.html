@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" class="uk-height-1-1">
+    <head>
+
+        <!-- head data -->
+        <meta charset="utf-8">
+        <meta name="author" content="as3lang community">
+        <meta name="description" content="Welcome to as3lang.org">
+
+        <title>$title$</title>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- favicons -->
+
+        <!-- uikit 2.21.0 - http://cdnjs.com/libraries/uikit  -->
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/2.21.0/css/uikit.min.css" rel="stylesheet" />
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/2.21.0/css/uikit.almost-flat.min.css" rel="stylesheet" />
+
+        <!-- inline -->
+        <style>
+        .uk-container-1-1 {
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+          padding: 0 25px;
+          width: 100%;
+        }
+        /* Large screen and bigger */
+        @media (min-width: 1220px) {
+          .uk-container-1-1 {
+            padding: 0 35px;
+          }
+        }
+
+        .aa-color-red { background-color: #f1463f; }
+        .aa-color-darkred { background-color: #c73e38; }
+        .aa-color-yellow { background-color: #ffcc00; }
+        .aa-color-darkyellow { background-color: #d2a903; }
+        .aa-color-white { background-color: #ffffff; }
+        .aa-color-cutter { background-color: #fff200; }
+        .aa-color-grey { background-color: gainsboro; }
+        .aa-color-ghost { background-color: ghostwhite; }
+        .aa-color-neutralBlackU { background-color: #4c4845; }
+
+        .aa-color-red-stripe
+        {
+          background: repeating-linear-gradient(
+            45deg,
+            #f1463f,
+            #f1463f 10px,
+            #c73e38 10px,
+            #c73e38 20px
+          );
+        }
+
+        .aa-color-red-stripe2x
+        {
+          background: repeating-linear-gradient(
+            45deg,
+            #f1463f,
+            #f1463f 10px,
+            #c73e38 10px,
+            #c73e38 20px
+          );
+        }
+
+        .aa-color-yellow-stripe
+        {
+          background: repeating-linear-gradient(
+            45deg,
+            #ffcc00,
+            #ffcc00 10px,
+            #d2a903 10px,
+            #d2a903 20px
+          );
+        }
+
+        .aa-color-yellow-stripe2x
+        {
+          background: repeating-linear-gradient(
+            45deg,
+            #ffcc00,
+            #ffcc00 20px,
+            #d2a903 20px,
+            #d2a903 40px
+          );
+        }
+
+        .aa-color-orange-stripe
+        {
+          background: repeating-linear-gradient(
+            45deg,
+            #ffcc00,
+            #ffcc00 10px,
+            #fcb712 10px,
+            #fcb712 20px
+          );
+        }
+
+        .aa-color-orange-stripe2x
+        {
+          background: repeating-linear-gradient(
+            45deg,
+            #ffcc00,
+            #ffcc00 20px,
+            #fcb712 20px,
+            #fcb712 40px
+          );
+        }
+
+        .aa-link-footer {
+          color: #4c4845;
+          text-decoration: none;
+        }
+
+        .aa-link-footer:hover ,
+        .aa-link-footer:focus {
+          color: #f1463f;
+          text-decoration: none;
+          outline: none;
+        }
+
+        #global-container
+        {
+          min-height: 99%;
+          background-color: #ffffff;
+        }
+
+        #container-100
+        {
+          background-color: #ffffff;
+        }
+
+        #container-center-100
+        {
+          min-height: 200px;
+          background-color: #ffffff;
+        }
+
+        #global-footer
+        {
+          height: 132px;
+          background-color: #ffcc00;
+        }
+        </style>
+
+    </head>
+
+    <body class="uk-height-1-1 aa-color-cutter">
+
+      <!-- global container -->
+      <div id="global-container" class="uk-position-relative">
+      <!-- container 100%  -->
+      <div id="container-100" class="uk-container-1-1 uk-position-relative">
+
+                    <!-- sections -->
+
+                    $body$
+                    
+                    <br/>
+                    <!-- sections END -->
+
+            </div>
+            <!-- container 100% END -->
+            <div id="clear-footer" class="uk-clear">
+            </div>
+        </div>
+        <!-- global container END -->
+
+
+        <!-- container footer 100%  -->
+        <div id="global-footer" class="uk-container-1-1 uk-position-relative uk-margin-top">
+        
+        <!-- footer -->
+            <div class="uk-flex uk-flex-center aa-color-grey1">
+
+                <div class="uk-flex uk-flex-center uk-flex-middle uk-flex-space-between" style="height: 10px;">
+                    &nbsp;&nbsp;
+                    <a class="aa-link-footer" href="https://github.com/Corsaair/redtamarin" target="_blank">
+                        <img src="http://redtamarin.com/assets/images/redtamarin_letters.png" alt="">    
+                    </a>
+                </div>
+
+            </div>
+
+        <!-- footer END -->
+
+        </div>
+        <!-- container footer 100% END -->
+
+        <!-- jQuery 2.1.4 - https://developers.google.com/speed/libraries/devguide#jquery  -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+        <!-- uikit 2.21.0 - http://cdnjs.com/libraries/uikit  -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/uikit/2.21.0/js/uikit.min.js"></script>
+
+        <!-- main -->
+        <script>
+        var onStart = function()
+        {
+            $$( ".aa-script" ).removeClass( "aa-script" );
+            
+            var footerH = $$( "#global-footer" ).height();
+            $$( "#clear-footer" ).height( footerH );
+            $$( "#global-container" ).css( "margin-bottom", "-" + footerH + "px" );
+            $$( "#container-center-100" ).height(  $$( window ).height() - footerH );
+            
+        }
+
+        var onResize = function()
+        {
+            var footerH = $$( "#global-footer" ).height();
+            $$( "#container-center-100" ).height(  $$( window ).height() - footerH );
+        }
+
+        $$( window ).ready( onStart );
+        $$( window ).resize( onResize );
+        </script>
+
+    </body>
+</html>

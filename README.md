@@ -1,75 +1,96 @@
-as3shebang
-==========
+The ActionScript 3.0 Interpreter
+================================
 
-Run ActionScript 3.0 shell scripts.
+**as3shebang** is an executable program based on the RedTamarin runtime.
 
-This is an executable program based on the RedTamarin runtime,
-designed to help you run ActionScript 3.0 shell scripts.
+It allows you to run uncompiled ActionScript 3.0 source code
+as an executable shell script.
 
-It allows you to run uncompiled ActionScript 3.0 source code or scripts
-as an executable program.
+The executable is totally independent of any other installed runtimes,
+and so can be installed with Redtamarin runtimes in parallel or without them.
 
-As any shell scripts make the script executable
-and use the following as first line:
-```
-#!/usr/bin/as3shebang --
-```
 
 Install
 -------
 
 Download the package for your operating system
 
-**Ubuntu** / **Debian**
+  - **Windows**  
+    `as3shebang_1.0.0_win32.deb` for 32-bit systems  
+    `as3shebang_1.0.0_win64.deb` for 64-bit systems
+  - **Mac OS X**  
+    `as3shebang_1.0.0_darwin-i386.deb` for 32-bit systems  
+    `as3shebang_1.0.0_darwin-amd64.deb` for 64-bit systems
+  - **Linux**  
+    `as3shebang_1.0.0_i386.deb` for 32-bit systems  
+    `as3shebang_1.0.0_amd64.deb` for 64-bit systems
 
-`$ sudo dpkg -i as3shebang_0.9-1_amd64.deb`
 
-**Mac OS X**
+### Windows Install
 
-Run `as3shebang_0.9-1.pkg`
+You will need a POSIX environment setup  
+and may have to install `redtamarin-setup.bat` first  
+see [Redtamarin Windows Environment Setup][RWES]
+
+install  
+`$ wpkg -i as3shebang_1.0.0_win64.deb`
 
 
-**Manual**
+### Mac OS X Install
 
-If you build the executable yourself you can do a manual install
+You need the command-line tool `dpkg` installed  
+either use [MacPorts][MACPORTS] `$ port install dpkg`
+or [Brew][BREW] `$ brew install dpkg`
 
-`sudo cp as3shebang /usr/bin`
+install  
+`$ sudo dpkg -i as3shebang_1.0.0_darwin-amd64.deb`
+
+If you receive some errors because of gnutar not found,
+you can force the install with  
+`$ sudo dpkg --force-all -i as3shebang_1.0.0_darwin-amd64.deb`
+
+
+### Linux Install
+
+`$ sudo dpkg -i as3shebang_1.0.0_amd64.deb`
+
 
 
 Example
 -------
 
-Create a script
+Create a script  
 `$ touch test`
 
-Make it executable
+Make it executable  
 `$ chmod +x test`
 
-Edit the script
-`nano test`
+Edit the script  
+`$ nano test`
 
 Starts the script with the shebang line
-and use the ActionScript 3.0 language
 ```as3
-#!/usr/bin/as3shebang -- 
+#!/usr/bin/as3shebang
 
+// Use AS3 to write some shell scripts :)
 import shell.Program;
-import shell.FileSystem;
+import shell.Runtime;
 
 trace( "hello world" );
 
-for( var i:uint = 0; i < Program.argv.length; i++ )
-{
-	trace( "argv[" + i + "] = " + Program.argv[i] );
-}
-
-trace( "as3shebang = " + as3shebang );
-trace( "scriptname = " + scriptname );
+trace( "    Program.type = " + Program.type );
 trace( "Program.filename = " + Program.filename );
 trace( "startupDirectory = " + Program.startupDirectory );
+trace( "    Program args = " + Program.argv );
+trace( "" );
+trace( "Redtamarin v" + Runtime.version + " " + (Runtime.is64bit() ? "64-bit": "32-bit" ) );
 ```
 
-Run the script
-`$ ./test`
+Run the script  
+`$ ./test`  
+`$ ./test a b c`
 
 
+[RWES]: https://github.com/Corsaair/redtamarin/wiki/RedtamarinWindowsEnvironmentSetup
+[MACPORTS]: https://www.macports.org/
+[BREW]: http://brew.sh/

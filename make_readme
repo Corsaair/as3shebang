@@ -1,0 +1,2 @@
+#!/bin/bash
+pandoc --variable=title:README --template=build/template.html -r markdown_github README.md -o README.html
